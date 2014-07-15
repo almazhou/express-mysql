@@ -16,6 +16,21 @@ router.get('/:user_id/orders/:order_id/payment', function(req, res) {
  	})	 
 });
 
+router.post('/:user_id/orders/:order_id/payment', function(req, res) {
+	var payment_params = {
+		user_id: req.params.user_id,
+		order_id: req.params.order_id,
+		amount: req.body.amount
+	}
+	Payment.save(payment_params, function(err, result){
+		if(!err){
+		res.location("/users/"+req.params.user_id+"/orders/"+req.params.order_id + "/payment");
+		return res.send(201);
+	}
+	});
+ 		 
+});
+
 router.post('/:id/orders', function(req, res) {
  	var order_param = {
 		total_cost: req.body.total_cost,

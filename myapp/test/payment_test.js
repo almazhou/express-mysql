@@ -26,4 +26,30 @@ describe("/GET",function(){
 	});
 });
 
+describe("test /POST",function(){
+	beforeEach(function(done){
+		Payment.reset();
+		done();
+	});
+
+	it("should return 201 when post all payment",function(done){
+		request
+		.post("/users/1/orders/1/payment")
+		.send({amount:78.0})
+		.expect(201,function(err,res){
+			var location = res.header.location;
+			location.should.containEql("/users/1/orders/1/payment");
+			done();
+		});
+	});
+	afterEach(function(done){
+		Payment.reset();
+		done();
+	});
+})
+
+
+
+
+
 

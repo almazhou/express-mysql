@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
   	Product.findById (req.params.id, function (err,result){
-  		return err? res.send(500) : res.send(result);
+  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
   	})
 });
 

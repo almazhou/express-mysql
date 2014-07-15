@@ -31,6 +31,13 @@ describe("/GET",function(){
 			done();
 		});
 	});
+
+	it("should return 404 when get one product failed",function(done){
+		request
+		.get("/products/500")
+		.expect(404,done);
+	});
+
 	afterEach(function(done){
 		Product.reset();
 		done();

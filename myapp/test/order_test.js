@@ -31,6 +31,12 @@ describe("/GET",function(){
 			done();
 		});
 	});
+
+	it("should return 404 when get one order failed",function(done){
+		request
+		.get("/users/1/orders/1000")
+		.expect(404,done);
+	});
 	afterEach(function(done){
 		Order.reset();
 		done();

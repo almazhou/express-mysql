@@ -5,7 +5,15 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
   	Product.all (function (err,result){
-  		return err? res.send(500) : res.send(result);
+  		var resultJson = result.map(function(product){
+ 			return {
+ 				uri: "/products/"+product.id,
+ 				id: product.id,
+ 				name : product.name,
+ 				current_price : product.price
+ 			};
+ 		});
+  		return err? res.send(500) : res.send(resultJson);
   	});
 });
 
@@ -23,7 +31,15 @@ router.post('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
   	Product.findById (req.params.id, function (err,result){
-  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+  		var resultJson = result.map(function(product){
+ 			return {
+ 				uri: "/products/"+product.id,
+ 				id: product.id,
+ 				name : product.name,
+ 				current_price : product.price
+ 			};
+ 		});
+  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
   	})
 });
 

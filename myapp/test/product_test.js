@@ -17,7 +17,8 @@ describe("/GET",function(){
 			var product = res.body[0];
 			product.should.have.property("name","zhouxuan");
 			product.should.have.property("id",1);
-			product.should.have.property("price","45.0");
+			product.should.have.property("current_price","45.0");
+			product.should.have.property("uri","/products/1");
 			done();
 		});
 	});
@@ -29,7 +30,8 @@ describe("/GET",function(){
 			var product = res.body[0];
 			product.should.have.property("name","zhouxuan");
 			product.should.have.property("id",1);
-			product.should.have.property("price","45.0");
+			product.should.have.property("current_price","45.0");
+			product.should.have.property("uri","/products/1");
 			done();
 		});
 	});

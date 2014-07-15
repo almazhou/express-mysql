@@ -5,5 +5,5 @@ create table payment(
 	amount double not null,
 	order_id int,
 	user_id int,
-	date DATETIME DEFAULT CURRENT_TIMESTAMP
+	date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

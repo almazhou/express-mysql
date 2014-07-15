@@ -11,13 +11,19 @@ exports.save = function (create_params, callback){
 }
 
 exports.all = function (callback){
-	connection.query("SELECT * FROM product",function(err,result){
+	connection.query("SELECT * FROM product",function (err,result){
 		if(err){
 			callback(err);
 		}else{
 			callback(null,result);
 		}
 	});
+}
+
+exports.findById = function (id,callback){
+	connection.query("SELECT * FROM product where id = ?" , id, function (err,result){
+		return err? callback(err) : callback(null, result);
+	})
 }
 
 exports.reset = function (){

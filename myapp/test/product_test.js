@@ -20,6 +20,17 @@ describe("/GET",function(){
 			done();
 		});
 	});
+
+	it("should return 200 when get one product",function(done){
+		request
+		.get("/products/1")
+		.expect(200,function(err,res){
+			var product = res.body[0];
+			product.should.have.property("name","zhouxuan");
+			product.should.have.property("id",1);
+			done();
+		});
+	});
 	afterEach(function(done){
 		Product.reset();
 		done();

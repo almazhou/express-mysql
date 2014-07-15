@@ -8,4 +8,10 @@ router.get('/', function (req, res) {
   	})
 });
 
+router.get('/:id', function (req, res) {
+  	Product.findById (req.params.id, function (err,result){
+  		return err? res.send(500) : res.send(result);
+  	})
+});
+
 module.exports = router;

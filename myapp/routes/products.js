@@ -33,6 +33,22 @@ router.get('/:id/pricings', function (req, res) {
   	})
 });
 
+router.post('/:id/pricings', function (req, res) {
+  	var pricing_param = {
+		amount: req.body.amount,
+		product_id: req.params.id
+	}
+
+	Pricing.save(pricing_param, function(err, result){
+		if(!err){
+		res.location("/products/1/pricings/"+result.insertId);
+		return res.send(201);
+	}
+	});
+});
+
+
+
 router.get('/:product_id/pricings/:pricing_id', function (req, res) {
   	Pricing.findPricingById (req.params.product_id,req.params.pricing_id, function (err,result){
   		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));

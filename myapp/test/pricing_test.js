@@ -41,3 +41,25 @@ describe("/GET",function(){
 		done();
 	});
 });
+
+describe("test /POST" ,function(){
+	beforeEach(function(done){
+		Pricing.reset();
+		done();	
+	});
+	it("should return 201 for post one pricing",function(done){
+		request
+		.post("/products/1/pricings")
+		.send({amount:56.0})
+		.expect(201,function(err,res){
+			var location = res.header.location;
+			location.should.containEql("/products/1/pricings/1");
+			done();
+		})
+	});
+
+	afterEach(function(done){
+		Pricing.reset();
+		done();	
+	});
+});

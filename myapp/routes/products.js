@@ -45,7 +45,15 @@ router.get('/:id', function (req, res) {
 
 router.get('/:id/pricings', function (req, res) {
   	Pricing.findAllPricings (req.params.id, function (err,result){
-  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+  		var resultJson = result.map(function(pricing){
+ 			return {
+ 				uri: "/products/"+pricing.product_id +"/pricings/"+ pricing.id,
+ 				id: pricing.id,
+ 				product_id : pricing.product_id,
+ 				amount : pricing.amount
+ 			};
+ 		});
+  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
   	})
 });
 
@@ -67,7 +75,15 @@ router.post('/:id/pricings', function (req, res) {
 
 router.get('/:product_id/pricings/:pricing_id', function (req, res) {
   	Pricing.findPricingById (req.params.product_id,req.params.pricing_id, function (err,result){
-  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+  		var resultJson = result.map(function(pricing){
+ 			return {
+ 				uri: "/products/"+pricing.product_id +"/pricings/"+ pricing.id,
+ 				id: pricing.id,
+ 				product_id : pricing.product_id,
+ 				amount : pricing.amount
+ 			};
+ 		});
+  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
   	})
 });
 

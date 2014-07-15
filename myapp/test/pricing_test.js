@@ -16,6 +16,7 @@ describe("/GET",function(){
 			var pricing = res.body[0];
 			pricing.should.have.property("amount",56.0);
 			pricing.should.have.property("id",1);
+			pricing.should.have.property("uri","/products/1/pricings/1");
 			done();
 		});
 	});
@@ -27,6 +28,7 @@ describe("/GET",function(){
 			var pricing = res.body[0];
 			pricing.should.have.property("amount",56.0);
 			pricing.should.have.property("id",1);
+			pricing.should.have.property("uri","/products/1/pricings/1");
 			done();
 		});
 	});

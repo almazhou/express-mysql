@@ -29,6 +29,7 @@ describe("/GET",function(){
 			var order = res.body[0];
 			order.should.have.property("total_cost",56.0);
 			order.should.have.property("user_id",1);
+			order.should.have.property("uri","/users/1/orders/1");
 			done();
 		});
 	});

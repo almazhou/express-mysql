@@ -54,7 +54,15 @@ router.post('/:id/orders', function(req, res) {
 
 router.get('/:user_id/orders/:order_id', function(req, res) {
  	Order.findOrderById(req.params.user_id,req.params.order_id, function (err,result){
- 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+ 		var resultJson = result.map(function(order){
+ 			return {
+ 				uri: "/users/"+order.user_id+"/orders/"+order.id,
+ 				total_cost : order.total_cost,
+ 				user_id : order.user_id,
+ 				date : order.date
+ 			};
+ 		})
+ 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
  	})	 
 });
 

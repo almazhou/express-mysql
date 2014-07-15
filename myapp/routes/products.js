@@ -1,5 +1,6 @@
 var express = require('express');
 var Product = require("../model/product");
+var Pricing = require("../model/pricing");
 var router = express.Router();
 
 router.get('/', function (req, res) {
@@ -26,5 +27,10 @@ router.get('/:id', function (req, res) {
   	})
 });
 
+router.get('/:id/pricings', function (req, res) {
+  	Pricing.findAllPricings (req.params.id, function (err,result){
+  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+  	})
+});
 
 module.exports = router;

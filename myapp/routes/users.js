@@ -12,14 +12,23 @@ router.get('/:id/orders', function(req, res) {
  				user_id : order.user_id,
  				date : order.date
  			};
- 		})
+ 		});
  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
  	})	 
 });
 
 router.get('/:user_id/orders/:order_id/payment', function(req, res) {
  	Payment.findAllPayment(req.params.user_id,req.params.order_id, function (err,result){
- 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+ 		var resultJson = result.map(function(payment){
+ 			return {
+ 				uri: "/users/"+payment.user_id+"/orders/"+payment.order_id + "/payment",
+ 				amount : payment.amount,
+ 				user_id : payment.user_id,
+ 				order_id : payment.order_id,
+ 				date : payment.date
+ 			};
+ 		});
+ 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
  	})	 
 });
 

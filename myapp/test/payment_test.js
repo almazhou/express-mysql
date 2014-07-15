@@ -17,6 +17,7 @@ describe("/GET",function(){
 			payment.should.have.property("amount",56.0);
 			payment.should.have.property("user_id",1);
 			payment.should.have.property("order_id",1);
+			payment.should.have.property("uri","/users/1/orders/1/payment");
 			done();
 		});
 	});

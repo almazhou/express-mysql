@@ -9,4 +9,10 @@ router.get('/:id/orders', function(req, res) {
  	})	 
 });
 
+router.get('/:user_id/orders/:order_id', function(req, res) {
+ 	Order.findOrderById(req.params.user_id,req.params.order_id, function (err,result){
+ 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+ 	})	 
+});
+
 module.exports = router;

@@ -20,6 +20,16 @@ exports.findAllOrders = function (user_id,callback){
 	});
 }
 
+exports.findOrderById = function (user_id,order_id,callback){
+	connection.query("SELECT * FROM orders where user_id = ? and id = ?",[user_id,order_id],function(err,result){
+		if(!err){
+			callback(null, result);
+		}else{
+			callback(err);
+		}
+	});
+}
+
 
 
 exports.reset = function (){

@@ -42,3 +42,26 @@ describe("/GET",function(){
 		done();
 	});
 });
+
+describe("test /POST" ,function(){
+	beforeEach(function(done){
+		Order.reset();
+		done();	
+	});
+	it("should return 201 for post one pricing",function(done){
+		request
+		.post("/users/1/orders")
+		.send({total_cost: 54.0})
+		.expect(201,function(err,res){
+			var location = res.header.location;
+			location.should.containEql("/users/1/orders/1");
+			done();
+		})
+	});
+
+	afterEach(function(done){
+		Order.reset();
+		done();	
+	});
+});
+

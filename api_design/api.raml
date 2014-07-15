@@ -1,0 +1,158 @@
+#%RAML 0.8
+title: Order,Products and Payment System API
+mediaType: application/json
+
+/products:
+  get:
+    description: as a customer , I'd like to see all the products in the system so that I can choose one to buy.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "uri":"/products/1",
+                  "name":"whatever",
+                  "price":45.0
+                  "id":12
+                }
+               ]
+  post:
+    description: as a admin, I'd like to add one product to system so that customers can buy the product.
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          name:
+            type: string 
+          price:
+            type: number
+    responses:
+      201:      
+  /{id}:
+    get:
+      description: as a customer , I'd like to see the info of specific product so that I can decide if I will buy it.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "uri":"/products/1",
+                  "name":"whatever",
+                  "price":45.0
+                  "id":12
+                } 
+    /pricings:
+      get:
+        description: as a admin, I'd like to see all the pricings of this product so that I can know the history prices
+        responses:
+          200:
+            body:
+              application/json:          
+                example: |
+                  [
+                    {
+                      "uri": "/products/1/pricings/1",
+                      "product_id": 1,
+                      "price": 34,
+                      "date": "2013-04-06"
+                    }
+                  ]
+      post:
+        description: as a admin, I'd like to change price of the product so that I can manage my product price whenever I want.
+        body:
+          application/x-www-form-urlencoded:
+            formParameters:
+              price:
+                type: number
+        responses:
+          201:
+      /{priceId}:
+        get:
+          description: as a admin, I'd like to see specific pricing of specific product so that I know the history prices of that product.
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {
+                     "uri": "/products/1/pricings/1",
+                      "product_id": 1,
+                      "price": 34,
+                      "date": "2013-04-06" 
+                    }
+/users:
+  /{id}:
+    /orders:
+      get:
+        description: As a customer, I'd like to see all the orders that I have purchased so that I know my buying histories.
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                    "uri":"/users/1/orders/1",
+                    "id":1,
+                    "user_id":1,
+                    "order_id":1,
+                    "total_cost":54
+                    "date": "2013-05-09"
+                    }
+                  ]  
+      post:
+        description: as a customer, I'd like to purchase a order so that I can buy products on line
+        body:
+          application/x-www-form-urlencoded:      
+            formParameters:
+              total_cost:
+                type: number
+        responses:
+          201:
+          
+      /{orderId}:
+        get:
+          description: as a customer, I'd like to see specific order so that I know specific info of that order
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {
+                      "uri":"/users/1/orders/1",
+                      "id":1,
+                      "user_id":1,
+                      "order_id":1,
+                      "total_cost":54,
+                      "date": "2013-05-09"
+                    }
+        /payment:
+          get:
+            description: as a customer, I'd like to see how much money I have paid for specific order so that I can manage my money properly
+            responses:
+              200:  
+                body:
+                  application/json:            
+                    example: |
+                      {
+                        "uri": "/users/1/orders/1/payment",
+                        "user_id": 1,
+                        "order_id": 1,
+                        "amount": 500,
+                        "date": "2013-05-09"
+                      }
+          post:
+            description: as a customer, I'd like to pay my specific orders so that I can get purchase that order.
+            body:
+              application/x-www-form-urlencoded:            
+                formParameters:
+                  amount:
+                    type: number
+            responses:
+              201:
+              
+     
+
+

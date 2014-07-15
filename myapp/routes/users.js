@@ -3,10 +3,17 @@ var Order = require('../model/order');
 var Payment = require('../model/payment');
 var router = express.Router();
 
-/* GET users listing. */
 router.get('/:id/orders', function(req, res) {
  	Order.findAllOrders(req.params.id, function (err,result){
- 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+ 		var resultJson = result.map(function(order){
+ 			return {
+ 				uri: "/users/"+order.user_id+"/orders/"+order.id,
+ 				total_cost : order.total_cost,
+ 				user_id : order.user_id,
+ 				date : order.date
+ 			};
+ 		})
+ 		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
  	})	 
 });
 

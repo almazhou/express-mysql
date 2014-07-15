@@ -20,6 +20,17 @@ describe("/GET",function(){
 		});
 	});
 
+	it("should return 200 when get one pricing",function(done){
+		request
+		.get("/products/1/pricings/1")
+		.expect(200,function(err,res){
+			var pricing = res.body[0];
+			pricing.should.have.property("amount",56.0);
+			pricing.should.have.property("id",1);
+			done();
+		});
+	});
+
 	afterEach(function(done){
 		Pricing.reset();
 		done();

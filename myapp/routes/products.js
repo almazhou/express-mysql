@@ -33,4 +33,11 @@ router.get('/:id/pricings', function (req, res) {
   	})
 });
 
+router.get('/:product_id/pricings/:pricing_id', function (req, res) {
+  	Pricing.findPricingById (req.params.product_id,req.params.pricing_id, function (err,result){
+  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(result));
+  	})
+});
+
+
 module.exports = router;

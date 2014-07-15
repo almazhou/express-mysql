@@ -20,6 +20,18 @@ exports.findAllPricings = function (product_id,callback){
 	});
 }
 
+exports.findPricingById = function (product_id,pricing_id,callback){
+	console.log("I am here now in find all pricing by id");
+	connection.query("SELECT * FROM pricing where product_id = ? and id = ?",[product_id,pricing_id],function(err,result){
+		if(!err){
+			callback(null, result);
+		}else{
+			callback(err);
+		}
+	});
+}
+
+
 exports.reset = function (){
 	connection.query("truncate pricing", function(err){
 		if(err){

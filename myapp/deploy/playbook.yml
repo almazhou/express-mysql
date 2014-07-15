@@ -1,0 +1,10 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: True
+  roles:
+    - mysql
+    - nodejs
+    - public_git
+    - mysql_table
+

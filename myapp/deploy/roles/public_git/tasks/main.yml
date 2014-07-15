@@ -1,0 +1,12 @@
+---
+    - name: Create directory under /srv for thingy
+      file: path=/srv/thingy state=directory mode=755
+    - name: Install git
+      action: apt pkg={{item}} state=installed
+      with_items:
+        - git
+        - git-core
+        - git-man
+    - name: Git checkout from github
+      git: repo=https://github.com/almazhou/express-mysql.git
+        dest=/srv/thingy

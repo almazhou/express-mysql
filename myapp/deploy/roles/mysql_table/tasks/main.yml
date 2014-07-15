@@ -1,0 +1,4 @@
+---
+- name: going to specific tables 
+  command: chdir=/srv/thingy/myapp/sql sh set_up_table.sh
+

@@ -21,7 +21,7 @@ router.post('/', function (req, res) {
 	var product_params = {
 		name : req.body.name,
 		price: req.body.price
-	}
+	};
   	Product.save(product_params,function (err,result){
   		if(err) return res.send(500);
   		res.location("/products/"+result.insertId);
@@ -40,7 +40,7 @@ router.get('/:id', function (req, res) {
  			};
  		});
   		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
-  	})
+  	});
 });
 
 router.get('/:id/pricings', function (req, res) {
@@ -54,14 +54,14 @@ router.get('/:id/pricings', function (req, res) {
  			};
  		});
   		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
-  	})
+  	});
 });
 
 router.post('/:id/pricings', function (req, res) {
   	var pricing_param = {
 		amount: req.body.amount,
 		product_id: req.params.id
-	}
+	};
 
 	Pricing.save(pricing_param, function(err, result){
 		if(!err){
@@ -84,7 +84,7 @@ router.get('/:product_id/pricings/:pricing_id', function (req, res) {
  			};
  		});
   		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
-  	})
+  	});
 });
 
 

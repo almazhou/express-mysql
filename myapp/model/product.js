@@ -8,7 +8,7 @@ exports.save = function (create_params, callback){
 			callback(null,result);
 		}
 	});
-}
+};
 
 exports.all = function (callback){
 	connection.query("SELECT * FROM product",function (err,result){
@@ -18,13 +18,13 @@ exports.all = function (callback){
 			callback(null,result);
 		}
 	});
-}
+};
 
 exports.findById = function (id,callback){
 	connection.query("SELECT * FROM product where id = ?" , id, function (err,result){
 		return err? callback(err) : callback(null, result);
-	})
-}
+	});
+};
 
 exports.reset = function (){
 	connection.query("truncate product", function(err){
@@ -33,6 +33,6 @@ exports.reset = function (){
 		}else{
 			console.log("success reset table");
 		}
-	})
-}
+	});
+};
 

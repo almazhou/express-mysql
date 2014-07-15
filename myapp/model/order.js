@@ -8,7 +8,7 @@ exports.save = function (create_params, callback){
 			callback(null,result);
 		}
 	});
-}
+};
 
 exports.findAllOrders = function (user_id,callback){
 	connection.query("SELECT * FROM orders where user_id = ?",user_id,function(err,result){
@@ -18,7 +18,7 @@ exports.findAllOrders = function (user_id,callback){
 			callback(err);
 		}
 	});
-}
+};
 
 exports.findOrderById = function (user_id,order_id,callback){
 	connection.query("SELECT * FROM orders where user_id = ? and id = ?",[user_id,order_id],function(err,result){
@@ -28,7 +28,7 @@ exports.findOrderById = function (user_id,order_id,callback){
 			callback(err);
 		}
 	});
-}
+};
 
 
 
@@ -39,5 +39,5 @@ exports.reset = function (){
 		}else{
 			console.log("success reset table");
 		}
-	})
-}
+	});
+};

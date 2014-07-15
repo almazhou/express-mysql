@@ -8,7 +8,7 @@ exports.save = function (create_params, callback){
 			callback(null,result);
 		}
 	});
-}
+};
 
 exports.findAllPricings = function (product_id,callback){
 	connection.query("SELECT * FROM pricing where product_id = ?",product_id,function(err,result){
@@ -18,7 +18,7 @@ exports.findAllPricings = function (product_id,callback){
 			callback(err);
 		}
 	});
-}
+};
 
 exports.findPricingById = function (product_id,pricing_id,callback){
 	console.log("I am here now in find all pricing by id");
@@ -29,7 +29,7 @@ exports.findPricingById = function (product_id,pricing_id,callback){
 			callback(err);
 		}
 	});
-}
+};
 
 
 exports.reset = function (){
@@ -39,5 +39,5 @@ exports.reset = function (){
 		}else{
 			console.log("success reset table");
 		}
-	})
-}
+	});
+};

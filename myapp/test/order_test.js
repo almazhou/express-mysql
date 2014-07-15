@@ -58,7 +58,7 @@ describe("test /POST" ,function(){
 			var location = res.header.location;
 			location.should.containEql("/users/1/orders/1");
 			done();
-		})
+		});
 	});
 
 	afterEach(function(done){

@@ -47,7 +47,7 @@ describe("test /POST",function(){
 		Payment.reset();
 		done();
 	});
-})
+});
 
 
 

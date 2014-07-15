@@ -8,7 +8,7 @@ exports.save = function (create_params, callback){
 			callback(null,result);
 		}
 	});
-}
+};
 
 exports.findAllPayment = function (user_id,order_id,callback){
 	connection.query("SELECT * FROM payment where user_id = ? and order_id = ?",[user_id,order_id],function(err,result){
@@ -18,7 +18,7 @@ exports.findAllPayment = function (user_id,order_id,callback){
 			callback(err);
 		}
 	});
-}
+};
 exports.reset = function (){
 	connection.query("truncate payment", function(err){
 		if(err){
@@ -26,5 +26,5 @@ exports.reset = function (){
 		}else{
 			console.log("success reset table");
 		}
-	})
-}
+	});
+};

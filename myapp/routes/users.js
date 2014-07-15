@@ -14,7 +14,7 @@ router.get('/:id/orders', function(req, res) {
  			};
  		});
  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
- 	})	 
+ 	});	 
 });
 
 router.get('/:user_id/orders/:order_id/payment', function(req, res) {
@@ -29,7 +29,7 @@ router.get('/:user_id/orders/:order_id/payment', function(req, res) {
  			};
  		});
  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
- 	})	 
+ 	});	 
 });
 
 router.post('/:user_id/orders/:order_id/payment', function(req, res) {
@@ -37,7 +37,7 @@ router.post('/:user_id/orders/:order_id/payment', function(req, res) {
 		user_id: req.params.user_id,
 		order_id: req.params.order_id,
 		amount: req.body.amount
-	}
+	};
 	Payment.save(payment_params, function(err, result){
 		if(!err){
 		res.location("/users/"+req.params.user_id+"/orders/"+req.params.order_id + "/payment");
@@ -51,7 +51,7 @@ router.post('/:id/orders', function(req, res) {
  	var order_param = {
 		total_cost: req.body.total_cost,
 		user_id: req.params.id
-	}
+	};
 	Order.save(order_param, function(err, result){
 		if(!err){
 		res.location("/users/"+req.params.id+"/orders/"+result.insertId);
@@ -70,9 +70,9 @@ router.get('/:user_id/orders/:order_id', function(req, res) {
  				user_id : order.user_id,
  				date : order.date
  			};
- 		})
+ 		});
  		return err? res.send(500) : (result.length === 0 ? res.send(404) : res.send(resultJson));
- 	})	 
+ 	});	 
 });
 
 

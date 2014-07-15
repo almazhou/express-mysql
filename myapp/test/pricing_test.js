@@ -31,6 +31,11 @@ describe("/GET",function(){
 		});
 	});
 
+	it("should return 404 when get one pricing which not exist",function(done){
+		request
+		.get("/products/1/pricings/100")
+		.expect(404,done);
+	});
 	afterEach(function(done){
 		Pricing.reset();
 		done();

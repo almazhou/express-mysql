@@ -1,17 +1,16 @@
 ---
-  - name: Install nodejs
-    apt: pkg=nodejs state=installed
-  - name: Install node-dev
-    apt: pkg=nodejs-dev state=installed
-  - name: Install npm
-    apt: pkg=npm state=installed
 
-# I've no idea if this is a good idea or not, but I've found some old things like it. 
-
-  - name: Create symlink for legacy code node->nodejs
-    file: src=/usr/bin/nodejs dest=/usr/local/bin/node state=link
-    when: ansible_distribution_release == "saucy"
-
-  - name: Create symlink for legacy node platforms
-    file: src=/usr/bin/node dest=/usr/bin/nodejs state=link
-    when: ansible_distribution_release != "saucy"
+  - name: purge nodejs
+    apt: name=nodejs purge=yes
+  - name: purge npm
+    apt: name=npm purge=yes
+  - name: update_apt_repository
+    apt: update_cache=yes
+  - name: Install add properties
+    apt: name=python-software-properties force=yes state=present
+  - name: add repository to vm
+    apt_repository: repo='ppa:chris-lea/node.js'
+  - name: update_apt_repository
+    apt: update_cache=yes
+  - name: install nodejs
+    apt: name=nodejs state=latest 

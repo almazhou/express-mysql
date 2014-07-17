@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat');
 
 gulp.task('default', function () {
-   return gulp.src("app.js")
+   return gulp.src(["./app.js","./database/*.js","./model/*.js","./routes/*.js"])
       .pipe(jshint())
       .pipe(jshint.reporter('default'))
       .pipe(uglify())
